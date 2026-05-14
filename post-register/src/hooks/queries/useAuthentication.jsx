@@ -27,11 +27,13 @@ export function useAuthentication(accessToken) {
     return useQuery ({
         queryKey: ["authentication", accessToken],
         queryFn: async() => {
-         try {
-            return await requestAuthentication(accessToken);
-         } catch(error) {
-            return error;
-        }
-    },
-});
+            try {
+                return await requestAuthentication(accessToken);
+             } catch(error) {
+                return error;
+            }
+        },
+        staleTime: 1000 * 60 * 2,
+        gcTime: 1000 * 60 * 5,
+    });
 }
